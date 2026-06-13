@@ -52,6 +52,11 @@
         "writable" = "yes";
         "guest ok" = "no";
         "valid users" = "@users";
+        # Refuse the connection if the user's home dir doesn't exist. Samba has
+        # no way to hide a static share from the browse list by path existence,
+        # so this guards access rather than visibility.
+        "preexec" = "test -d %H";
+        "preexec close" = "yes";
       };
       "media" = {
         "path" = "/mnt/data/media";
