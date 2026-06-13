@@ -22,6 +22,9 @@
         # Unknown/anonymous logins fall back to the guest account instead of
         # being rejected, enabling read-only guest access on shares below.
         "map to guest" = "bad user";
+        # Only list shares a user can actually access, so guests don't see the
+        # home/homes shares (they lack access) in the browse list.
+        "access based share enum" = "yes";
         "unix password sync" = "yes";
         "usershare path" = "/var/lib/samba/usershares";
         "usershare max shares" = "100";
