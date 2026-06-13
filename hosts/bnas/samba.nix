@@ -38,15 +38,20 @@
       homes = {
         "browseable" = "no";
         "writable" = "yes";
+        # Restrict to real login users so the guest account (nobody) does not
+        # get an auto-created "nobody" home share in the browse list.
+        "valid users" = "@users";
       };
       # Explicit share that presents the connecting user's own home dir as
       # "home" (browseable), alongside the per-username [homes] share above.
+      # Gated on @users (excludes guest account nobody, which is in nogroup),
+      # so access based share enum hides it from guests.
       "home" = {
         "path" = "%H";
         "browseable" = "yes";
         "writable" = "yes";
         "guest ok" = "no";
-        "valid users" = "%U";
+        "valid users" = "@users";
       };
       "media" = {
         "path" = "/mnt/data/media";
